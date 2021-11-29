@@ -57,6 +57,7 @@ while True:
 
     register_runner(Runner(runner_name, runner_time))
 
-print("Schnellster läufer:", fastest_runner.name, "Zeit:", convert(fastest_runner.time))
-print("Langsamster läufer:", slowest_runner.name, "Zeit:", convert(slowest_runner.time))
+print("Langsamster läufer:", fastest_runner.name, "Zeit:", convert(fastest_runner.time))
+print("Schnellster läufer:", slowest_runner.name, "Zeit:", convert(slowest_runner.time))
+print("Differenz: ", convert(fastest_runner.time - slowest_runner.time))
 print("Fehlerhafte Eingaben:", wrong_input)
