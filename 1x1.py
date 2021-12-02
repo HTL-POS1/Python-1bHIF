@@ -11,4 +11,3 @@ def calculate_multiplication_row(current_step: int):
 
 for i in range(max + 1):
     print(calculate_multiplication_row(i))
-
