@@ -4,7 +4,7 @@ target = int(input("Gimme eine Zahl: "))  # number, you want to get the digits
 digits = []                               # list with all digits
 backup_target = target                    # unmodified target number
 
-while target >= 1:
+while (target >= 1):
     digits.append(target % 10)
     target //= 10
 
