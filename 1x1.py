@@ -9,5 +9,5 @@ def calculate_multiplication_row(current_step: int):
         display = display + str(i) + " * " + str(current_step) + " = " + str(current_step * i) + " | "
     return display
 
-for i in range(max + 1):
+for i in range(1, max + 1):
     print(calculate_multiplication_row(i))
