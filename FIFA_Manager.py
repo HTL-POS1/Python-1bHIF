@@ -24,18 +24,18 @@ def ask_for_positive_int(text: str):
     while (input_number < 0):
         input_number = int(input(text))
     return input_number
-    
+
 
 default_team = Team(input("Wie heißt dein Team? "))     # main team
-rounds = u.ask_for_positive_int("Wie viele Runden werden gespielt? (0 = Ende) ")
+rounds = ask_for_positive_int("Wie viele Runden werden gespielt? (0 = Ende) ")
 if (rounds == 0):
     sys.exit(505)
 
 for i in range(rounds):
     # inputs
     opposite_team = Team(input("Wie heißt der Gegner für Runde " + str(i+1) + "? "))
-    goals_made = u.ask_for_positive_int("Wie viele Tore hat das Team " + default_team.name + " gemacht? ")
-    goals_taken = u.ask_for_positive_int("Wie viele Tore hat das Team " + opposite_team.name + " gemacht? ")
+    goals_made = ask_for_positive_int("Wie viele Tore hat das Team " + default_team.name + " gemacht? ")
+    goals_taken = ask_for_positive_int("Wie viele Tore hat das Team " + opposite_team.name + " gemacht? ")
 
     # save goals
     default_team.goals += goals_made
