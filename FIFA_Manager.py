@@ -1,7 +1,6 @@
 # FIFA-Manager, vergleich verschiedener Mannschaften
 # 1BHIF | Marc Edlinger | 02.12.2021
 import sys
-import util.utils as u
 
 rounds = 0                         # max rounds
 worst_team = None                  # worst team, the main team played with
@@ -18,6 +17,14 @@ class Team():       # model for a team, storing their stats
         self.looses = 0
         self.draws = 0
 
+
+# Force the user to provide an positive integer
+def ask_for_positive_int(text: str):
+    input_number = -1
+    while (input_number < 0):
+        input_number = int(input(text))
+    return input_number
+    
 
 default_team = Team(input("Wie heißt dein Team? "))     # main team
 rounds = u.ask_for_positive_int("Wie viele Runden werden gespielt? (0 = Ende) ")
