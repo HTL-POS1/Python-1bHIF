@@ -58,6 +58,7 @@ def start():                                                # recursive method t
     while (height < 4):
         height = int(input("Wie hoch soll der Baum sein? (min. 4, 0 = Ende) "))
         if (height == 0):
+            print("Frohe Weihnachten!")
             quit()
 
     direction: int = -1
