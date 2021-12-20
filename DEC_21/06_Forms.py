@@ -58,6 +58,22 @@ def draw_triangle(height: int, filled: bool, growing: Growing, binded: Binding):
                     print(" " * (height - i) + "x" + " " * (i - 2) + "x")
                 print((height - 2) * " " + "xx")
                 print((height - 1) * " " + "x")
+    else:                                               # absteigend
+        if (binded == Binding.RIGHT):                   # rechtsbündig
+            if (filled):
+                for i in range(height + 1):
+                    print("x" * i)
+            else:
+                print("x")
+                print("xx")
+                for i in range(3, height):
+                    print("x" + " " * (i - 1) + "x")
+                print("x" * height)
+        else:                                           # linksbündig
+            if (filled):
+                for i in range(height, 0, -1):
+                    print("x" * i)
+
 
 
 def start():
