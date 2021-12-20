@@ -73,9 +73,15 @@ def draw_triangle(height: int, filled: bool, growing: Growing, binded: Binding):
             if (filled):
                 for i in range(height, 0, -1):
                     print("x" * i)
+            else:
+                print("x" * height)
+                for i in range(height, 2, -1):
+                    print("x" + " " * (i - 2) + "x")
+                print("xx")
+                print("x")
 
 
-
+# recursive input fetcher function
 def start():
     form: str = ask("Welche Form? (Q)uadrat, (D)reieck, (L)inie, (E)nde: ", ["q", "d", "l", "e"])
     height: int = ask_for_positive_integer("Wie hoch? ")
