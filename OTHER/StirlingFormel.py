@@ -1,11 +1,15 @@
 # Prove for the stirling formula
 # 1BHIF | Marc Edlinger | 18.12.2021
-from math import sqrt, pi, e, factorial
-
+from math import sqrt, pi, e
 limit: int = int(input("Wie weit willst du gehen...? "))
-if (limit > 170):
-    print("Zu hohe Zahl")
-    quit()
+
+
+def factorial(n: int):
+    if (n == 0):
+        return 1
+    if (n == 1):
+        return n
+    return factorial(n - 1) * n
 
 
 def stirling(n: int):
@@ -13,7 +17,7 @@ def stirling(n: int):
 
 
 for i in range(1, limit + 1):
-    factorial_result: float = factorial(i)
+    factorial_result: int = factorial(i)
     stirling_result: float = stirling(i)
 
     drift: float = 0
