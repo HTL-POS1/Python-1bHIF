@@ -2,15 +2,17 @@
 # 1BHIF | Marc Edlinger | 13.12.2021
 def ask(message: str, valid_options: list):
     value: str = ""
-    while (value == "" or not valid_options.contains(value)):
+    while (value == "" or not valid_options.__contains__(value)):
         value = input(message)
     return value
+
 
 def ask_for_positive_integer(message: str):
     value: int = -1
     while (value <= 0):
         value = int(input(message))
     return value   
+
 
 def draw_quadrat(height: int, filled: bool):
     full_line: str = "*" * height
@@ -26,11 +28,12 @@ def draw_quadrat(height: int, filled: bool):
 
 
 def start():
-    form: str = ask("Welche Form? (Q)uadrat, (D)reieck, (L)inie, (E)nde: ", list("q", "d", "l", "e"))
+    form: str = ask("Welche Form? (Q)uadrat, (D)reieck, (L)inie, (E)nde: ", ["q", "d", "l", "e"])
     height: int = ask_for_positive_integer("Wie hoch? ")
-    filled: bool = ask("Gefüllt? (L)eer, (G)efüllt", list("l", "g"))
+    filled: bool = True if ask("(V)oll oder (L)eer? ", ["l", "v"]) == "v" else False
     if (form == "q"):
         draw_quadrat(height, filled)
+    start()
 
 
 start()
