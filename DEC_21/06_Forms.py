@@ -1,13 +1,18 @@
 # Formen Zeichnen
 # 1BHIF | Marc Edlinger | 13.12.2021
 from enum import Enum
+count: int = 0                      # wie viele Formen hat der Anwender gezeichnet?
+
+
 class Growing(Enum):
     ASCENDING = "a",
     DESCENDING = "b"
 
+
 class Binding(Enum):
     LEFT = "l",
     RIGHT = "r"
+
 
 def ask(message: str, valid_options: list):
     value: str = ""
@@ -16,9 +21,14 @@ def ask(message: str, valid_options: list):
     return value
 
 
-def ask_for_positive_integer(message: str):
+def ask_for_color(message: str):
+    value: str = ""
+    # while (value == "" or not Fore[])
+
+
+def ask_for_bounded_integer(message: str, min_possible: int, max_possible: int = -1):
     value: int = -1
-    while (value <= 0):
+    while ((value < min_possible) or (max_possible != -1 and value > max_possible)):
         value = int(input(message))
     return value   
 
@@ -81,18 +91,36 @@ def draw_triangle(height: int, filled: bool, growing: Growing, binded: Binding):
                 print("x")
 
 
+def draw_line(length: int, growing: Growing):
+    if (growing == Growing.DESCENDING):         # absteigend
+        for i in range(length):
+            print(" " * i + "x")
+    else:                                       # aufsteigend
+        for i in range(length, 0, -1):
+            print(" " * i + "x")
+
+
 # recursive input fetcher function
 def start():
+    global count
     form: str = ask("Welche Form? (Q)uadrat, (D)reieck, (L)inie, (E)nde: ", ["q", "d", "l", "e"])
-    height: int = ask_for_positive_integer("Wie hoch? ")
-    filled: bool = True if ask("(V)oll oder (L)eer? ", ["l", "v"]) == "v" else False
+    if (form == "e"):
+        return
+    height: int = ask_for_bounded_integer("Wie hoch (mindestens 4)? ", min_possible=4)
     if (form == "q"):
+        filled: bool = True if ask("(V)oll oder (L)eer? ", ["l", "v"]) == "v" else False
         draw_quadrat(height, filled)
     elif (form == "d"):
         growing: Growing = Growing.ASCENDING if ask("(A)ufsteigend oder a(B)steigend? ", ["a", "b"]) == "a" else Growing.DESCENDING
         binding: Binding = Binding.RIGHT if ask("(L)inksbündig oder (R)echtsbündig? ", ["l", "r"]) == "r" else Binding.LEFT
+        filled: bool = True if ask("(V)oll oder (L)eer? ", ["l", "v"]) == "v" else False
         draw_triangle(height, filled, growing, binding)
+    else:                               # sonst muss der input immer l sein, anhand der obrigen konditionen
+        growing: Growing = Growing.ASCENDING if ask("(A)ufsteigend oder a(B)steigend? ", ["a", "b"]) == "a" else Growing.DESCENDING
+        draw_line(height, growing)
+    count += 1
     start()
 
 
 start()
+print(f"Bye, du hast {count} Figur(en) gezeichnet.")
