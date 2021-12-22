@@ -49,8 +49,8 @@ def draw_triangle(height: int, filled: bool, growing: Growing, binded: Binding):
     if (growing == Growing.ASCENDING):                  # aufsteigend
         if (binded == Binding.RIGHT):                   # rechtsbündig
             if (filled):                                # gefüllt
-                for i in range(height + 1):
-                    print(" " * (height - i) + "x" * (i + 1))
+                for i in range(height):
+                    print("." * (height - i) + "x" * (i + 1))
             else:                                       # nicht gefüllt
                 print(" " * (height - 1) + "x")
                 print(" " * (height - 2) + "xx")
