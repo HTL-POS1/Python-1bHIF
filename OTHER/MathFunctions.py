@@ -20,6 +20,9 @@ class MathFunction():
     def __str__(self):
         return f"{self.symbole}({self.var_name}) = {self.term}"
 
+    def __int__(self):
+        return self.value(0)
+
     def value(self, x: int):
         prepared_term = self.term
         prepared_term = prepared_term.replace(self.var_name, "(" + str(x) + ")")
@@ -87,20 +90,3 @@ class MathFunction():
             y.append(value if not only_positive else (value if value >= 0 else 0))
 
         return y
-
-
-# f = MathFunction("2*x^3 + -5*x^2 + 6*x + -3", color='blue')
-# h = MathFunction("2*x + -2", symbole='h', color='green')
-# f.plot(-5, 5)
-# print(f)
-# print(f.value_str(5))
-# f_prime = f.derivative()
-# print(f_prime)
-# print(f_prime.value_str(5))
-# f_prime_prime = f_prime.derivative()
-# print(f_prime_prime)
-# print(f_prime_prime.value_str(5))
-#
-# g = MathFunction("2*z^2 + 3", symbole="g", var_name="z", color='pink')
-# print(g.derivative())
-# f.plot(-5, 5)
