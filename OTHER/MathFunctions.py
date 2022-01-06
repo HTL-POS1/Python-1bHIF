@@ -14,7 +14,7 @@ class MathFunction():
     def parse(self: list, symbole: str = "f", var_name: str = "x", color='r'):
         term_string = self[0]
         for part in self[1:]:
-            term_string += " + " + part
+            term_string += " " + part
         return MathFunction(term_string, symbole, var_name, color)
 
     def __str__(self):
@@ -35,13 +35,10 @@ class MathFunction():
 
     def derivative(self):
         parts = self.term.split(" ")
-        if parts.__contains__("+"):
-            parts.remove("+")
-        if parts.__contains__("-"):
-            parts.remove("-")
 
-        derivative_parts = list()
-        for part in parts:
+        derivative_parts = parts.copy()
+        for i in range(0, len(parts), 2):
+            part = parts[i]
             exp = 0
             var_name = self.var_name
             if part.__contains__("^"):
@@ -54,6 +51,7 @@ class MathFunction():
             exp -= 1
 
             if coefficient == 0:
+                derivative_parts[i] = "0"
                 continue
 
             part_string = f"{coefficient}*{var_name}"
@@ -61,8 +59,14 @@ class MathFunction():
                 part_string = part_string.replace("*" + var_name, "")
             elif exp != 1:
                 part_string += "^" + str(exp)
-            derivative_parts.append(part_string)
+            derivative_parts[i] = part_string
         return MathFunction.parse(derivative_parts, symbole=self.symbole + "'")
+
+    def nth_derivative(self, n: int):
+        f: MathFunction = self
+        for i in range(n):
+            f = f.derivative()
+        return f
 
     def plot(self, neg_limit: int, pos_limit: int, only_posititve: bool = False, other_functions=None):
         numbers = np.linspace(neg_limit, pos_limit, 100)
