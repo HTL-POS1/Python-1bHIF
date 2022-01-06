@@ -21,9 +21,10 @@ for i in range(1, limit + 1):
     stirling_result: float = stirling(i)
 
     drift: float = 0
+    bigger: str = "S" if stirling_result > factorial_result else "F"
     if (stirling_result > factorial_result):
         drift = 100 * (factorial_result / stirling_result)
     else:
         drift = 100 * (stirling_result / factorial_result)
     drift = -1 * (drift - 100)
-    print(f"{i}. {drift:.10f}%")
+    print(f"{i}. {drift:.10f}% | {bigger}")
