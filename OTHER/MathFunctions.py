@@ -21,16 +21,16 @@ class MathFunction():
         return f"{self.symbole}({self.var_name}) = {self.term}"
 
     def __int__(self):
-        return self.value(0)
+        return self.evaluate(0)
 
-    def value(self, x: int):
+    def evaluate(self, x: int):
         prepared_term = self.term
         prepared_term = prepared_term.replace(self.var_name, "(" + str(x) + ")")
         prepared_term = prepared_term.replace("^", "**")
         return eval(prepared_term)
 
-    def value_str(self, x: int):
-        value: int = self.value(x)
+    def get_result_string(self, x: int):
+        value: int = self.evaluate(x)
         return f"{self.symbole}({x}) = {value}"
 
     def derivative(self):
@@ -62,11 +62,10 @@ class MathFunction():
             derivative_parts[i] = part_string
         return MathFunction.parse(derivative_parts, symbole=self.symbole + "'")
 
-
     def integrate(self):
         parts = self.term.split(" ")
 
-        derivative_parts = parts.copy()
+        integration_parts = parts.copy()
         for i in range(0, len(parts), 2):
             part = parts[i]
             exp = 0
@@ -75,18 +74,22 @@ class MathFunction():
                 exp = int(part.split("^")[1])
             elif part.__contains__(var_name):
                 exp = 1
-            else:
-                exp = 0
 
-            coefficient = int(part.split("*")[0]) if part.__contains__("*") else 1
+            if (part.__contains__("*")):
+                coefficient = int(part.split("*")[0])
+            elif (part.__contains__(var_name)):
+                coefficient = 1
+            else:
+                coefficient = int(part)
             exp += 1
             coefficient /= exp
 
-            part_string = f"{coefficient}*{var_name}"
+            part_string = f"{coefficient:,.2f}*{var_name}"
 
-            part_string += "^" + str(exp)
-            derivative_parts[i] = part_string
-        return MathFunction.parse(derivative_parts, symbole=self.symbole + "'")
+            if (exp != 1):
+                part_string += "^" + str(exp)
+            integration_parts[i] = part_string
+        return MathFunction.parse(integration_parts, symbole=self.symbole.upper())
 
     def nth_derivative(self, n: int):
         f: MathFunction = self
@@ -116,10 +119,11 @@ class MathFunction():
     def get_values(self, numbers, only_positive: bool):
         y = list()
         for i in numbers:
-            value = self.value(i)
+            value = self.evaluate(i)
             y.append(value if not only_positive else (value if value >= 0 else 0))
 
         return y
 
-f = MathFunction("2x^2 + x - 3")
+
+f = MathFunction("2*x^2 + x - 3")
 print(f.integrate())
