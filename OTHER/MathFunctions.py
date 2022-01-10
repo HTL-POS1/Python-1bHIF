@@ -62,6 +62,32 @@ class MathFunction():
             derivative_parts[i] = part_string
         return MathFunction.parse(derivative_parts, symbole=self.symbole + "'")
 
+
+    def integrate(self):
+        parts = self.term.split(" ")
+
+        derivative_parts = parts.copy()
+        for i in range(0, len(parts), 2):
+            part = parts[i]
+            exp = 0
+            var_name = self.var_name
+            if part.__contains__("^"):
+                exp = int(part.split("^")[1])
+            elif part.__contains__(var_name):
+                exp = 1
+            else:
+                exp = 0
+
+            coefficient = int(part.split("*")[0]) if part.__contains__("*") else 1
+            exp += 1
+            coefficient /= exp
+
+            part_string = f"{coefficient}*{var_name}"
+
+            part_string += "^" + str(exp)
+            derivative_parts[i] = part_string
+        return MathFunction.parse(derivative_parts, symbole=self.symbole + "'")
+
     def nth_derivative(self, n: int):
         f: MathFunction = self
         for i in range(n):
@@ -94,3 +120,6 @@ class MathFunction():
             y.append(value if not only_positive else (value if value >= 0 else 0))
 
         return y
+
+f = MathFunction("2x^2 + x - 3")
+print(f.integrate())
