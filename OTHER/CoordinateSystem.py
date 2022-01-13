@@ -7,7 +7,7 @@ MARKED_POINT_SYMBOLE: str = "x"
 
 x_size: int = abs(int(input("Wie groß x-Achse? ")))
 y_size: int = abs(int(input("Wie groß y-Achse? ")))
-points = []
+points: list = []
 
 def contains_point(y: int):
     for point in points:
@@ -22,7 +22,7 @@ def get_x_value(y: int):
     raise Exception
 
 def draw_y_line(line: int):
-    print_line = x_size * X_AXIS_SYMBOLE + Y_AXIS_SYMBOLE + x_size * X_AXIS_SYMBOLE
+    print_line: str = x_size * X_AXIS_SYMBOLE + Y_AXIS_SYMBOLE + x_size * X_AXIS_SYMBOLE
     if (contains_point(line)):
         x: int = get_x_value(line)
         if (x == 0):
@@ -51,7 +51,7 @@ def start():
         if (contains_point(y_input)):
             print("invalid point, already a point for this y-value")
             start()
-    x_input = int(input("Gebe die X-Koordinate deines Punktes an."))
+    x_input: int = int(input("Gebe die X-Koordinate deines Punktes an."))
     points.append((x_input, y_input))
 
     print(f"registered... {len(points)} points...")
