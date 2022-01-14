@@ -1,5 +1,10 @@
-# Funktionen
-# 1BHIF | Marc Edlinger | 13.01.2022
+"""
+POS1
+Marc EDLINGER
+1bHIF
+
+13.01.2022
+"""
 
 def greet():            # funktion def(inieren)
     """
