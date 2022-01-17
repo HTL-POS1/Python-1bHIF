@@ -12,7 +12,7 @@ def get_coefficient(exponent: int, step: int) -> int:
     return factorial(exponent) // (factorial(step) * factorial(exponent - step))
 
 
-def get_term(exponent: int, first_symbole: str = "a", second_symbole: str = "b") -> str:
+def print_term(exponent: int, first_symbole: str = "a", second_symbole: str = "b") -> str:
     """
     calculate something like (a + b)^c
     :param exponent: the power for the sum
@@ -38,8 +38,5 @@ def get_term(exponent: int, first_symbole: str = "a", second_symbole: str = "b")
     print(f"{second_symbole}^{exponent}")
 
 
-get_term(2)
-get_term(3)
-get_term(4)
-get_term(5)
-get_term(6)
+while True:
+    print_term(int(input("Exponent? ")))
