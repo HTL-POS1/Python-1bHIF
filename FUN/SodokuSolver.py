@@ -1,19 +1,30 @@
 from math import sqrt
 
 GRID: list = [
-    [4, 0, 2, 0, 0, 1, 0, 9, 0],
-    [1, 0, 0, 9, 3, 2, 6, 8, 4],
-    [0, 9, 6, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 7, 6, 0, 0, 0],
-    [6, 0, 5, 3, 0, 8, 4, 0, 1],
-    [0, 0, 0, 4, 2, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 7, 4, 0],
-    [7, 4, 1, 8, 6, 3, 0, 0, 2],
-    [0, 3, 0, 5, 0, 0, 1, 0, 8]
+    [5, 3, 0, 0, 7, 0, 0, 0, 0],
+    [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    [0, 9, 8, 0, 0, 0, 0, 6, 0],
+    [8, 0, 0, 0, 6, 0, 0, 0, 3],
+    [4, 0, 0, 8, 0, 3, 0, 0, 1],
+    [7, 0, 0, 0, 2, 0, 0, 0, 6],
+    [0, 6, 0, 0, 0, 0, 2, 8, 0],
+    [0, 0, 0, 4, 1, 9, 0, 0, 5],
+    [0, 0, 0, 0, 8, 0, 0, 7, 9]
 ]
+current_row: int = 0
+current_coloumn: int = 0
+while True:
+    user_input = input("Row " + str(current_row) + " | Col " + str(current_coloumn) + ": ")
+    if user_input is "nr":
+        current_row += 1
+        current_coloumn = 0
+    elif user_input is "end":
+        break
+    else:
+        GRID[current_row][current_coloumn] = int(user_input)
+        current_coloumn += 1
 GRID_SIZE: int = len(GRID)
 SQUARE_SIZE: int = round(sqrt(GRID_SIZE))
-
 
 def solve():
     for row, row_entry in enumerate(GRID):
