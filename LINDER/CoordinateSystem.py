@@ -1,6 +1,6 @@
 # Koordinatensystem
 # 1BHIF | Marc Edlinger | 12.01.2022
-X_AXIS_SYMBOLE: str = "__"
+X_AXIS_SYMBOLE: str = "_"
 X_AXIS_SYMBOLE_LENGTH: int = len(X_AXIS_SYMBOLE)
 Y_AXIS_SYMBOLE: str = "|"
 MARKED_POINT_SYMBOLE: str = "x"

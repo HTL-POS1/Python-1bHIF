@@ -11,18 +11,19 @@ GRID: list = [
     [0, 0, 0, 4, 1, 9, 0, 0, 5],
     [0, 0, 0, 0, 8, 0, 0, 7, 9]
 ]
-current_row: int = 0
+"""current_row: int = 0
 current_coloumn: int = 0
 while True:
     user_input = input("Row " + str(current_row) + " | Col " + str(current_coloumn) + ": ")
-    if user_input is "nr":
+    if user_input == "nr":
         current_row += 1
         current_coloumn = 0
-    elif user_input is "end":
+    elif user_input == "end":
         break
     else:
         GRID[current_row][current_coloumn] = int(user_input)
-        current_coloumn += 1
+        current_coloumn += 1"""
+
 GRID_SIZE: int = len(GRID)
 SQUARE_SIZE: int = round(sqrt(GRID_SIZE))
 

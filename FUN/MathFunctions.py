@@ -126,4 +126,5 @@ class MathFunction():
 
 
 f = MathFunction("2*x^2 + x - 3")
-print(f.integrate())
+F = f.integrate()
+print(F.evaluate(5) - F.evaluate(1))

@@ -1,10 +1,3 @@
-"""
-POS1
-Marc EDLINGER
-1bHIF
-
-14.01.2022
-"""
 def validate(x: int, max_value: int) -> bool:
     f"""
     :param x: the number you want to validate 
