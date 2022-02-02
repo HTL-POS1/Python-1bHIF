@@ -74,19 +74,30 @@ def draw_triangle(height: int, filled: bool, growing: Growing, binded: Binding):
                 print("x")
 
 
-def draw_rhombus(height: int, filled: bool):
-    pass
+def draw_rhombus(height: int):
+    half_hight: int = height // 2
+
+    for i in range(height):
+        spaces: int = abs(half_hight - i)
+        spaces_sring: str = ""
+        for j in range(spaces):
+            spaces_sring += " "
+
+        symboles: int = -2*abs(i - half_hight) + height               # https://i.imgur.com/NMCmDZh.png
+        symboles_string: str = ""
+        for j in range(symboles):
+            symboles_string += "x"
+        print(spaces_sring + symboles_string)
 
 
 def start():
     global count
-    form: str = ask("Welche Form? (Q)uadrat, (D)reieck, (L)inie, (E)nde: ", ["r", "d", "l", "e"])
+    form: str = ask("Welche Form? (R)aute, (D)reieck, (L)inie, (E)nde: ", ["r", "d", "l", "e"])
     if (form == "e"):
         return
     height: int = ask_for_bounded_integer("Wie hoch (mindestens 4)? ", min_possible=4)
     if (form == "r"):
-        filled: bool = True if ask("(V)oll oder (L)eer? ", ["l", "v"]) == "v" else False
-        draw_rhombus(height, filled)
+        draw_rhombus(height)
     else:                       # muss d sein
         growing: Growing = Growing.ASCENDING if ask("(A)ufsteigend oder a(B)steigend? ", ["a", "b"]) == "a" else Growing.DESCENDING
         binding: Binding = Binding.RIGHT if ask("(L)inksbündig oder (R)echtsbündig? ", ["l", "r"]) == "r" else Binding.LEFT
