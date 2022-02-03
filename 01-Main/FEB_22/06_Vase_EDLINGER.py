@@ -1,5 +1,5 @@
 # Formen Zeichnen
-# 1BHIF | Marc Edlinger | 13.12.2021
+# 1BHIF | Marc Edlinger | 03.02.2022
 from enum import Enum
 count: int = 0                      # wie viele Formen hat der Anwender gezeichnet?
 
