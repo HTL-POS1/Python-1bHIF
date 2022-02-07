@@ -2,6 +2,13 @@
 # 1BHIF | Marc Edlinger | 03.02.2022
 from enum import Enum
 count: int = 0                      # wie viele Formen hat der Anwender gezeichnet?
+colors: dict = {
+    "rot": "\u001b[31m",
+    "grün": "\u001b[32m",
+    "gelb": "\u001b[33m",
+    "blau": "\u001b[34m",
+    "lila": "\u001b[35m"
+}
 
 
 class Growing(Enum):
@@ -118,7 +125,10 @@ def start():
     elif (form == "v"):
         symbole: str = ask("Mit welchem Zeichen (x oder s)?", ["x", "s"])
         border: str = ask("Mit welchem Rand ($ oder #)?", ["$", "#"])
-        print(f"Flächeninhalt: {draw_vase(height, symbole, border)}")
+
+        primary_color: str = colors[ask("Primärfarbe? " + str(colors.keys()), list(colors.keys()))]
+        secondary_color: str = colors[ask("Sekundärfarbe? " + str(colors.keys()), list(colors.keys()))]
+        print(f"Flächeninhalt: {draw_vase(height, primary_color + symbole, secondary_color + border)}")
     else:                       # muss d sein
         growing: Growing = Growing.ASCENDING if ask("(A)ufsteigend oder a(B)steigend? ", ["a", "b"]) == "a" else Growing.DESCENDING
         binding: Binding = Binding.RIGHT if ask("(L)inksbündig oder (R)echtsbündig? ", ["l", "r"]) == "r" else Binding.LEFT
