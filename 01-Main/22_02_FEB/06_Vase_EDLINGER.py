@@ -9,6 +9,13 @@ colors: dict = {
     "blau": "\u001b[34m",
     "lila": "\u001b[35m"
 }
+background_colors: dict = {
+    "rot": "\033[41m",
+    "grün": "\033[42m",
+    "gelb": "\033[43m",
+    "blau": "\033[44m",
+    "lila": "\033[45m"
+}
 
 
 class Growing(Enum):
@@ -91,26 +98,26 @@ def build_string(i: int, s: str) -> str:
 def draw_rhombus(height: int, filled: bool):
     pass
 
-
+reset_color: str = "\033[0m"
 def draw_vase(height: int, symbole: str, border: str) -> int:
     """ print a vase on the terminal and returns the area"""
     j: int = 0          # counter
     area: int = 0
     for i in range(height, -1, -2):
         symboles: str = build_string(i, symbole)
-        display: str = border + symboles + border + symboles + border
-        area += len(display)
-        print(build_string(2*j, " ") + display)
+        display: str = border + symboles + border + symboles + border + reset_color
+        area += display.count(symbole)
+        print(build_string(2*j + 1, " ") + display)
         j += 1
 
     for i in range(height):
         symboles: str = build_string((i + 1), symbole)
-        display: str = border + symboles + border + symboles + border
+        display: str = border + symboles + border + symboles + border + reset_color
         for k in range(2):
-            area += len(display)
-            print(build_string(height - i - 1, " ") + display)
+            area += display.count(symbole)
+            print(build_string(height - i, " ") + display)
 
-    print(build_string(2*height+3, border))
+    print(build_string(2*height+5, border) + reset_color)
     return area
 
 def start():
@@ -128,7 +135,10 @@ def start():
 
         primary_color: str = colors[ask("Primärfarbe? " + str(colors.keys()), list(colors.keys()))]
         secondary_color: str = colors[ask("Sekundärfarbe? " + str(colors.keys()), list(colors.keys()))]
-        print(f"Flächeninhalt: {draw_vase(height, primary_color + symbole, secondary_color + border)}")
+
+        primary_background_color: str = background_colors[ask("Primärfarbe Hintergrund? " + str(background_colors.keys()), list(background_colors.keys()))]
+        secondary_background_color: str = background_colors[ask("Sekundärfarbe Hintergrund? " + str(background_colors.keys()), list(background_colors.keys()))]
+        print(f"Flächeninhalt: {draw_vase(height, primary_color + primary_background_color + symbole, secondary_color + secondary_background_color + border)}")
     else:                       # muss d sein
         growing: Growing = Growing.ASCENDING if ask("(A)ufsteigend oder a(B)steigend? ", ["a", "b"]) == "a" else Growing.DESCENDING
         binding: Binding = Binding.RIGHT if ask("(L)inksbündig oder (R)echtsbündig? ", ["l", "r"]) == "r" else Binding.LEFT
