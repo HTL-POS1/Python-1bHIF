@@ -13,11 +13,14 @@ colors: dict = {
     "lila": "\u001b[35m",
     "e": ""
 }
+
+
 def ask(message: str, valid_options: list) -> str:
     value: str = input(message)
     while (value == "" or not valid_options.__contains__(value)):
         value = input(message)
     return value
+
 
 def ask_int(message: str, min: int, max: int) -> int:
     value: int = 0
