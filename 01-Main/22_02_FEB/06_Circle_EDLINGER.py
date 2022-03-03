@@ -37,11 +37,13 @@ def count(l: list, search: str) -> int:
             count += 1
     return count
 
+
 def calculate():
     for x, s in enumerate(values):
         for y, s1 in enumerate(values):
             if ((x - rad)**2 + (y - rad)**2 - rad <= rad**2):
                 values[x][y] = symbole
+
 
 def draw():
     color_index: int = 0
@@ -58,6 +60,7 @@ def draw():
             else:
                 line_string += entry
         print(" " * (spaces // 2) + line_string)
+
 
 while rad != 0:
     rad = ask_int("Radius? (1-10)", 1, 10)
