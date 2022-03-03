@@ -1,3 +1,7 @@
+from random import seed, randrange
+seed()
+
+
 def sort(to_sort: list, predicate) -> list:
     """
     Sorts a provided list, and return it back.
@@ -8,18 +12,31 @@ def sort(to_sort: list, predicate) -> list:
     """
     had_to_sort: bool = False
     for index, element in enumerate(to_sort):
-        if index == len(to_sort) - 1:
+        if index == len(to_sort) - 1:                            # abbrechen wenn beim letzten Element
             break
-        next_element = to_sort[index + 1]
-        if (predicate(element, next_element) == next_element):          # dann tauschen
+        next_element = to_sort[index + 1]                        # musste im aktuellen durchlauf eine Vertrauschung durchgeführt werden?
+        if (predicate(element, next_element) == next_element):   # dann tauschen
             to_sort[index] = next_element
             to_sort[index + 1] = element
             if not had_to_sort:
                 had_to_sort = True
 
-    if had_to_sort:
+    if had_to_sort:                     # wenn etwas getauscht werden musste, noch einmal duchlaufen
         return sort(to_sort, predicate)
     return to_sort
+
+
+def is_reversed_list(list1: list, list2: list) -> bool:
+    if len(list1) != len(list2):
+        return False
+    for index, element in enumerate(list1):
+        if (element != list2[-index]):
+            return False
+    return True
+
+
+def generate_int_list(capicity: int) -> list:
+    return [randrange(1, 1000) for _ in range(capicity)]
 
 
 def compare_gt(first: int, second: int) -> int:
@@ -30,6 +47,7 @@ def compare_st(first: int, second: int) -> int:
     return first if first < second else second
 
 
-test_1: list = [5, 7, 2, 8]    # expected output: [2, 4, 7, 8]
-print(sort(test_1, compare_gt))
-print(sort(test_1, compare_st))
+test_1 = generate_int_list(10)
+
+sorted_st = sort(test_1, compare_gt)
+print(sorted_st)
