@@ -4,7 +4,7 @@ seed()
 
 def sort(to_sort: list, predicate) -> list:
     """
-    Sorts a provided list, and return it back.
+    Sorts a provided list recursively, and return it back.
     The predicate parameter has to be an function, which takes two integer-parameters and return that number,
     that should be at the lower index part.
 
@@ -27,6 +27,9 @@ def sort(to_sort: list, predicate) -> list:
 
 
 def is_reversed_list(list1: list, list2: list) -> bool:
+    """
+    check if one list is the reversed list of the other object
+    """
     if len(list1) != len(list2):
         return False
     for index, element in enumerate(list1):
@@ -36,6 +39,9 @@ def is_reversed_list(list1: list, list2: list) -> bool:
 
 
 def generate_int_list(capicity: int) -> list:
+    """
+    generate and return a list with random elements
+    """
     return [randrange(1, 1000) for _ in range(capicity)]
 
 
