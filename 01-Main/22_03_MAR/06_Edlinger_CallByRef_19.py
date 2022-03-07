@@ -4,9 +4,9 @@
 
 def getPosition(max: int) -> int:
     """ liest vom Anwender eine gueltige (0 bis max) Position ein und liefert diese """
-    pos = int(input("wo willst du die Zahl einfügen (0-" +str(max) +") "))
+    pos = int(input("wo willst du die Zahl einfügen (0-" + str(max) + ") "))
     while (pos < 0 or pos > max):
-        pos = int(input("von 0 bis " +str(max) +" "))
+        pos = int(input("von 0 bis " + str(max) + " "))
     return pos
 
 
