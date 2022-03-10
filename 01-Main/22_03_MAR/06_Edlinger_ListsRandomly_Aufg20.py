@@ -1,7 +1,7 @@
 """
 Marc EDLINGER
 1bHIF | 08/03/2022
-
+Arbeiten mit Listen und Zufallszahlen
 """
 from random import randint
 
