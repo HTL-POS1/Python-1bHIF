@@ -16,24 +16,24 @@ GRID: list = [
 
 def solve():
     for row, row_entry in enumerate(GRID):
-        for column, entry in enumerate(row_entry):
-            if (entry == 0):
-                for i in range(1, GRID_SIZE + 1):
-                    if (valid_placement(i, row, column)):
-                        GRID[row][column] = i
-                        if (solve()):
-                            return True
+        for column, entry in enumerate(row_entry):          # iteration through all elements
+            if (entry == 0):                                # if the current field is not set yet
+                for i in range(1, 10):                      # all digits
+                    if (valid_placement(i, row, column)):   # try if the current digit is a valid digit for the field
+                        GRID[row][column] = i               # update field
+                        if (solve()):                       # try if the board is solvable with the number, filled in
+                            return True                     # is solved
                         else:
-                            GRID[row][column] = 0
-                return False
+                            GRID[row][column] = 0           # set value back to 0 and try with another digit
+                return False                                # board is unsolvable
     return True
 
 
 def get_grid_display() -> str:
     value: str = ""
     for i, row in enumerate(GRID):
-        for j, coloumn in enumerate(row):
-            value += str(coloumn) + " "
+        for j, column in enumerate(row):
+            value += str(column) + " "
             if ((j + 1) % SQUARE_SIZE == 0):
                 if (j + 1 == GRID_SIZE):
                     if not ((i + 1) % SQUARE_SIZE == 0):
@@ -47,25 +47,25 @@ def get_grid_display() -> str:
 
 
 def is_in_row(n: int, row: int) -> bool:
-    for i in GRID[row]:
+    for i in GRID[row]:         # every element of param row
         if (i == n):
             return True
     return False
 
 
 def is_in_column(n: int, column: int) -> bool:
-    for row in GRID:
-        if (row[column] == n):
+    for row in GRID:            # every row
+        if (row[column] == n):  # check always the row in the given column
             return True
     return False
 
 
 def is_in_box(n: int, row: int, column: int):
-    row_position: int = row - row % SQUARE_SIZE
-    column_position: int = column - column % SQUARE_SIZE
-    for r in range(row_position, row_position + SQUARE_SIZE):
-        for c in range(column_position, column_position + SQUARE_SIZE):
-            if (GRID[r][c] == n):
+    row_pos: int = row - row % SQUARE_SIZE                          # upper left corner row of the square of the element
+    column_pos: int = column - column % SQUARE_SIZE                 # upper left corner col of the square of the element
+    for r in range(row_pos, row_pos + SQUARE_SIZE):                 # for every row in the square
+        for c in range(column_pos, column_pos + SQUARE_SIZE):       # for every col in the square
+            if (GRID[r][c] == n):                                   # if the elements is the element searching for
                 return True
     return False
 
