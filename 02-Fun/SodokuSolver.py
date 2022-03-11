@@ -1,4 +1,5 @@
 from math import sqrt
+from random import randint
 
 GRID: list = [
     [0, 1, 5, 7, 3, 0, 8, 0, 2],
@@ -12,34 +13,37 @@ GRID: list = [
     [0, 9, 0, 0, 5, 0, 0, 0, 0],
 ]
 
+
 def solve():
     for row, row_entry in enumerate(GRID):
-        for coloumn, entry in enumerate(row_entry):
+        for column, entry in enumerate(row_entry):
             if (entry == 0):
                 for i in range(1, GRID_SIZE + 1):
-                    if (valid_placement(i, row, coloumn)):
-                        GRID[row][coloumn] = i
+                    if (valid_placement(i, row, column)):
+                        GRID[row][column] = i
                         if (solve()):
                             return True
                         else:
-                            GRID[row][coloumn] = 0
+                            GRID[row][column] = 0
                 return False
     return True
 
 
-def print_grid():
+def get_grid_display() -> str:
+    value: str = ""
     for i, row in enumerate(GRID):
         for j, coloumn in enumerate(row):
-            print(coloumn, end=" ")
+            value += str(coloumn) + " "
             if ((j + 1) % SQUARE_SIZE == 0):
                 if (j + 1 == GRID_SIZE):
                     if not ((i + 1) % SQUARE_SIZE == 0):
-                        print("")
+                        value += "\n"
                 else:
-                    print("| ", end="")
+                    value += "| "
         if ((i + 1) % SQUARE_SIZE == 0):
             if not ((i + 1) == GRID_SIZE):
-                print("\n" + "-" * (2 * (GRID_SIZE - 1) + 3 * (SQUARE_SIZE - 1)))
+                value += "\n" + ("-" * ((2 * (GRID_SIZE - 1) + 3 * (SQUARE_SIZE - 1))) + "\n")
+    return value
 
 
 def is_in_row(n: int, row: int) -> bool:
@@ -49,25 +53,33 @@ def is_in_row(n: int, row: int) -> bool:
     return False
 
 
-def is_in_coloumn(n: int, coloumn: int) -> bool:
+def is_in_column(n: int, column: int) -> bool:
     for row in GRID:
-        if (row[coloumn] == n):
+        if (row[column] == n):
             return True
     return False
 
 
-def is_in_box(n: int, row: int, coloumn: int):
+def is_in_box(n: int, row: int, column: int):
     row_position: int = row - row % SQUARE_SIZE
-    coloumn_position: int = coloumn - coloumn % SQUARE_SIZE
+    column_position: int = column - column % SQUARE_SIZE
     for r in range(row_position, row_position + SQUARE_SIZE):
-        for c in range(coloumn_position, coloumn_position + SQUARE_SIZE):
+        for c in range(column_position, column_position + SQUARE_SIZE):
             if (GRID[r][c] == n):
                 return True
     return False
 
 
-def valid_placement(n: int, row: int, coloumn: int):
-    return (not is_in_box(n, row, coloumn) and not is_in_coloumn(n, coloumn) and not is_in_row(n, row))
+def valid_placement(n: int, row: int, column: int):
+    return (not is_in_box(n, row, column) and not is_in_column(n, column) and not is_in_row(n, row))
+
+
+def grid_to_file():
+    sudoko_id: int = randint(1000, 9999)
+    file = open(f"sudoko_results/sudoko_result{sudoko_id}.txt", "w")
+    file.write(get_grid_display())
+    file.close()
+    pass
 
 
 current_row: int = 0
@@ -76,6 +88,8 @@ GRID_SIZE: int = len(GRID)
 SQUARE_SIZE: int = round(sqrt(GRID_SIZE))
 while current_row != GRID_SIZE:
     input_string: str = input(f"Input für Reihe {current_row + 1}")
+    if (len(input_string) == 0):
+        break
     if (len(input_string) != GRID_SIZE):
         print("Ungültige Länge")
         continue
@@ -83,11 +97,12 @@ while current_row != GRID_SIZE:
         number: int = int(char)
         GRID[current_row][index] = number
     print("\n"*10)
-    print_grid()
+    print(get_grid_display())
     current_row += 1
 
 print("\nUnsolved:")
-print_grid()
+print(get_grid_display())
 solve()
 print("\nSolved: \n\n")
-print_grid()
+print(get_grid_display())
+grid_to_file()
