@@ -1,6 +1,5 @@
 from math import sqrt
 
-size: int = int(input("Wie groß soll das Sudoku Feld sein? "))
 GRID: list = [
     [0, 1, 5, 7, 3, 0, 8, 0, 2],
     [6, 0, 0, 0, 0, 1, 0, 0, 0],
@@ -12,13 +11,6 @@ GRID: list = [
     [0, 0, 0, 2, 0, 9, 0, 0, 1],
     [0, 9, 0, 0, 5, 0, 0, 0, 0],
 ]
-
-current_row: int = 0
-current_column: int = 0
-
-GRID_SIZE: int = len(GRID)
-SQUARE_SIZE: int = round(sqrt(GRID_SIZE))
-
 
 def solve():
     for row, row_entry in enumerate(GRID):
@@ -78,7 +70,23 @@ def valid_placement(n: int, row: int, coloumn: int):
     return (not is_in_box(n, row, coloumn) and not is_in_coloumn(n, coloumn) and not is_in_row(n, row))
 
 
-print("Unsolved:")
+current_row: int = 0
+
+GRID_SIZE: int = len(GRID)
+SQUARE_SIZE: int = round(sqrt(GRID_SIZE))
+while current_row != GRID_SIZE:
+    input_string: str = input(f"Input für Reihe {current_row + 1}")
+    if (len(input_string) != GRID_SIZE):
+        print("Ungültige Länge")
+        continue
+    for index, char in enumerate(input_string):
+        number: int = int(char)
+        GRID[current_row][index] = number
+    print("\n"*10)
+    print_grid()
+    current_row += 1
+
+print("\nUnsolved:")
 print_grid()
 solve()
 print("\nSolved: \n\n")
