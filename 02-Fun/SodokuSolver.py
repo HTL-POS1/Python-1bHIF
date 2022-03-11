@@ -1,31 +1,24 @@
 from math import sqrt
 
+size: int = int(input("Wie groß soll das Sudoku Feld sein? "))
 GRID: list = [
-    [5, 3, 0, 0, 7, 0, 0, 0, 0],
-    [6, 0, 0, 1, 9, 5, 0, 0, 0],
-    [0, 9, 8, 0, 0, 0, 0, 6, 0],
-    [8, 0, 0, 0, 6, 0, 0, 0, 3],
-    [4, 0, 0, 8, 0, 3, 0, 0, 1],
-    [7, 0, 0, 0, 2, 0, 0, 0, 6],
-    [0, 6, 0, 0, 0, 0, 2, 8, 0],
-    [0, 0, 0, 4, 1, 9, 0, 0, 5],
-    [0, 0, 0, 0, 8, 0, 0, 7, 9]
+    [0, 1, 5, 7, 3, 0, 8, 0, 2],
+    [6, 0, 0, 0, 0, 1, 0, 0, 0],
+    [4, 8, 7, 5, 0, 2, 0, 0, 0],
+    [3, 0, 9, 6, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 7, 0, 6, 0, 5],
+    [0, 4, 0, 0, 2, 8, 7, 0, 9],
+    [0, 0, 1, 0, 0, 3, 2, 0, 0],
+    [0, 0, 0, 2, 0, 9, 0, 0, 1],
+    [0, 9, 0, 0, 5, 0, 0, 0, 0],
 ]
-"""current_row: int = 0
-current_coloumn: int = 0
-while True:
-    user_input = input("Row " + str(current_row) + " | Col " + str(current_coloumn) + ": ")
-    if user_input == "nr":
-        current_row += 1
-        current_coloumn = 0
-    elif user_input == "end":
-        break
-    else:
-        GRID[current_row][current_coloumn] = int(user_input)
-        current_coloumn += 1"""
+
+current_row: int = 0
+current_column: int = 0
 
 GRID_SIZE: int = len(GRID)
 SQUARE_SIZE: int = round(sqrt(GRID_SIZE))
+
 
 def solve():
     for row, row_entry in enumerate(GRID):
@@ -54,7 +47,7 @@ def print_grid():
                     print("| ", end="")
         if ((i + 1) % SQUARE_SIZE == 0):
             if not ((i + 1) == GRID_SIZE):
-                print("\n" + "-" * (2*(GRID_SIZE - 1) + 3 * (SQUARE_SIZE - 1)))
+                print("\n" + "-" * (2 * (GRID_SIZE - 1) + 3 * (SQUARE_SIZE - 1)))
 
 
 def is_in_row(n: int, row: int) -> bool:
