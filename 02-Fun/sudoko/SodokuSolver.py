@@ -1,6 +1,5 @@
 from math import sqrt
 from random import randint
-
 GRID: list = [
     [0, 1, 5, 7, 3, 0, 8, 0, 2],
     [6, 0, 0, 0, 0, 1, 0, 0, 0],
@@ -42,7 +41,7 @@ def get_grid_display() -> str:
                     value += "| "
         if ((i + 1) % SQUARE_SIZE == 0):
             if not ((i + 1) == GRID_SIZE):
-                value += "\n" + ("-" * ((2 * (GRID_SIZE - 1) + 3 * (SQUARE_SIZE - 1))) + "\n")
+                value += "\n" + ("-" * ((2 * (GRID_SIZE - 1) + 3 * (SQUARE_SIZE - 1)))) + "\n"
     return value
 
 
@@ -86,23 +85,24 @@ current_row: int = 0
 
 GRID_SIZE: int = len(GRID)
 SQUARE_SIZE: int = round(sqrt(GRID_SIZE))
-while current_row != GRID_SIZE:
-    input_string: str = input(f"Input für Reihe {current_row + 1}")
-    if (len(input_string) == 0):
-        break
-    if (len(input_string) != GRID_SIZE):
-        print("Ungültige Länge")
-        continue
-    for index, char in enumerate(input_string):
-        number: int = int(char)
-        GRID[current_row][index] = number
-    print("\n"*10)
-    print(get_grid_display())
-    current_row += 1
+if __name__ == '__main__':
+    while current_row != GRID_SIZE:
+        input_string: str = input(f"Input für Reihe {current_row + 1}")
+        if (len(input_string) == 0):
+            break
+        if (len(input_string) != GRID_SIZE):
+            print("Ungültige Länge")
+            continue
+        for index, char in enumerate(input_string):
+            number: int = int(char)
+            GRID[current_row][index] = number
+        print("\n" * 10)
+        print(get_grid_display())
+        current_row += 1
 
-print("\nUnsolved:")
-print(get_grid_display())
-solve()
-print("\nSolved: \n\n")
-print(get_grid_display())
-grid_to_file()
+    print("\nUnsolved:")
+    print(get_grid_display())
+    solve()
+    print("\nSolved: \n\n")
+    print(get_grid_display())
+    grid_to_file()
