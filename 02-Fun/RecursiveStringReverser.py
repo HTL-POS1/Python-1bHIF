@@ -1,6 +1,7 @@
-def reverseString(s: str) -> str:
+def reverse_string(s: str) -> str:
     if s == "":
         return ""
-    return reverseString(s[1:]) + s[0]
+    return reverse_string(s[1:]) + s[0]
 
-print(reverseString("Hallo lele"))
+
+print(reverse_string("Hallo lele"))

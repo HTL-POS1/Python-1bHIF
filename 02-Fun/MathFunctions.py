@@ -127,4 +127,5 @@ class MathFunction():
 
 f = MathFunction("2*x^2 + x - 3")
 F = f.integrate()
+f.plot(-10, 10, False, [F])
 print(F.evaluate(5) - F.evaluate(1))
