@@ -2,6 +2,7 @@
 # 1BHIF | Marc Edlinger | 13.01.2022
 from math import factorial
 
+
 def get_coefficient(exponent: int, step: int) -> int:
     """
     calculate binomial-coefficient (bc)
@@ -12,7 +13,7 @@ def get_coefficient(exponent: int, step: int) -> int:
     return factorial(exponent) // (factorial(step) * factorial(exponent - step))
 
 
-def print_term(exponent: int, first_symbole: str = "a", second_symbole: str = "b") -> str:
+def print_term(exponent: int, first_symbole: str = "a", second_symbole: str = "b"):
     """
     calculate something like (a + b)^c
     :param exponent: the power for the sum
@@ -20,6 +21,10 @@ def print_term(exponent: int, first_symbole: str = "a", second_symbole: str = "b
     :param second_symbole: name of the second component of the binomial, default b
     :return: the whole term for the binomial
     """
+    if (exponent == 0):
+        print("1")
+        return
+
     print(f"{first_symbole}^{exponent}", end=" + ")
     for i in range(1, exponent):
         coefficient: int = get_coefficient(exponent, i)
