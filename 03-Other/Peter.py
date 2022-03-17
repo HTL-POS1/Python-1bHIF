@@ -1,35 +1,29 @@
-from random import seed, randint
+def count(to_check: list, search: str) -> int:
+    n: int = 0
+    for element in to_check:
+        if element == search:
+            n += 1
+    return n
 
-seed()
 
-
-def get_char_index(s: str, c: str) -> list:
-    i = 0
-    indexes = []
-    for char in s:
-        if char == c:
-            indexes.append(i)
+def get_different_chars(word: str) -> list:
+    chars: list = [""] * len(word)
+    i: int = 0
+    for char in word:
+        if count(chars, char) == 0:
+            chars[i] = char
         i += 1
-    return indexes
+    return chars
 
-words = ["gott", "jakob", "peter"]
 
-index: int = randint(0, len(words) - 1)
-selected_word: str = words[index]
-used_chars: str = ""
+def get_valid_elements(target: list) -> int:
+    n: int = 0
+    for e in target:
+        if not e == "":
+            n += 1
+    return n
 
-print(selected_word)
-progress: list = ["_"] * len(selected_word)
 
-char: str = input("Buchstabe: ")
-
-char_index = get_char_index(selected_word, char)
-print(progress)
-if len(char_index) == 0:
-    # nicht drinnen
-    print("nicht enthalten")
-else:
-    for i in char_index:
-        progress[i] = char
-
-print(progress)
+print(get_different_chars("anna"))
+print(get_different_chars("mississippi"))
+print(get_different_chars("donnerstag"))
