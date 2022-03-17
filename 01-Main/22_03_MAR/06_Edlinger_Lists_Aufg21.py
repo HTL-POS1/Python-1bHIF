@@ -7,11 +7,11 @@ Listen und Funktionen in Python
 
 def count(numbers: list, n: int) -> int:
     """ liefert die Anzahl, wie oft n in der liste numbers vorkommt"""
-    amount: int = 0
+    count: int = 0
     for i in numbers:
         if (i == n):
-            amount += 1
-    return amount
+            count += 1
+    return count
 
 
 def copy(source: list, target: list) -> int:
