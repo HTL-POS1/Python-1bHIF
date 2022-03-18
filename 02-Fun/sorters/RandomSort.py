@@ -3,6 +3,14 @@ import random as rndm
 rndm.seed()
 
 
+def init_random_list(size: int) -> list:
+    """ Returns a list with "size" random elemens """
+    list = [0]*size                # list, filled with 0's
+    for i in range(size):
+        list[i] = rndm.randint(1, 1000)    # change every list element to a random number
+    return list
+
+
 def is_sorted(to_check: list) -> bool:
     for i in range(len(to_check) - 1):
         if (to_check[i] > to_check[i + 1]):
@@ -30,5 +38,5 @@ def sort(list: list) -> int:
 
 runs: int = 5
 for i in range(runs):
-    list: list = [3, -557, 2, 8, 1, -7, 9, -7, 89, 8, -45, 47]
+    list: list = init_random_list(10)
     sort(list)
