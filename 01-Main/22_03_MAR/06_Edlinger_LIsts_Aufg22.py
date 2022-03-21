@@ -27,5 +27,9 @@ print(delete(list1, 2, -1), list1)                                        # 2 [5
 
 
 list2: list = [2, 3, 8, 2, 2, 5, 2, 4, 2, 6, 0]
-print(delete(list2, 2, -1), list2)                                        # 5 [3, 8, 5, 4, 6, 0, -1, -1, -1, -1, -1]
+print(delete(list2, 2, -1), list2)
+
+
+list3: list = [0]
+print(delete(list3, 2, -1), list3)                                        # 5 []
 
