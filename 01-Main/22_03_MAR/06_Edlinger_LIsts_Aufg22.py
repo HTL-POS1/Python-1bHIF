@@ -31,5 +31,5 @@ print(delete(list2, 2, -1), list2)
 
 
 list3: list = [0]
-print(delete(list3, 2, -1), list3)                                        # 5 []
+print(delete(list3, 2, -1), list3)                                        # 0 []
 
