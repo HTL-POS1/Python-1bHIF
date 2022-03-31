@@ -7,18 +7,13 @@ delete elements from array
 
 def delete(target: list, search: int, default: int) -> int:
     """ remove all search from target and put that much default's at the end of the array """
-    tmp_list: list = [default] * len(target)
     count: int = 0
-    index: int = 0
-    for element in target:
-        if element != search:
-            tmp_list[index] = element
-            index += 1
-        else:
+    for index, element in enumerate(target):
+        if (element == search):
+            for j in range(index, len(target) - 1, 1):
+                target[j] = target[j + 1]
+            target[len(target) - 1] = default
             count += 1
-
-    for i, e in enumerate(tmp_list):         # copy tmp_list into target
-        target[i] = e
     return count
 
 
