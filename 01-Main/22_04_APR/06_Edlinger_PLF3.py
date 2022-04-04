@@ -30,8 +30,9 @@ def count_descending(lst: list) -> int:
 
 
 def pretty_print(lst: list, should_print: bool) -> int:
-    """ print all negative numbers in lst with stars in front of it
-        if should_print is False, it will only return the absolute value sum of the negative numbers
+    """
+    print all negative numbers in lst with stars in front of it
+    if should_print is False, it will only return the absolute value of the sum of the negative numbers
     """
     sum: int = 0
     for element in lst:
@@ -75,6 +76,9 @@ def test_me(function, expected_result, *parameters):
         print("Test failed! Expected result:", expected_result, "but got:", result)
 
 
+"""
+TEST CASES
+"""
 if __name__ == "__main__":
     print("--- Tests for quadrate ---")
     test_me(quadrate, 55, [25, 7, 3, 232, 6])
