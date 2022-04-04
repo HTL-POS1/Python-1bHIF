@@ -30,6 +30,7 @@ def quick_sort(list: list, start: int, to: int):
         quick_sort(list, middle_index + 1, to)
 
 
-arr = [10, 7, 8, 9, 1, 5]
-quick_sort(arr, 0, len(arr) - 1)
-print(arr)
+if __name__ == "__main__":
+    arr = [10, 7, 8, 9, 1, 5]
+    quick_sort(arr, 0, len(arr) - 1)
+    print(arr)

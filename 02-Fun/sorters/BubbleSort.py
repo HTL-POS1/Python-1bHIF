@@ -2,7 +2,7 @@ from random import seed, randrange
 seed()
 
 
-def sort(to_sort: list, predicate) -> list:
+def bubble_sort(to_sort: list, predicate) -> list:
     """
     Sorts a provided list recursively, and return it back.
     The predicate parameter has to be an function, which takes two integer-parameters and return that number,
@@ -53,7 +53,8 @@ def compare_st(first: int, second: int) -> int:
     return first if first < second else second
 
 
-test_1 = generate_int_list(10)
+if __name__ == "__main__":
+    test_1 = generate_int_list(10)
 
-sorted_st = sort(test_1, compare_gt)
-print(sorted_st)
+    sorted_st = sort(test_1, compare_gt)
+    print(sorted_st)
