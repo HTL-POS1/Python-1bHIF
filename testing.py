@@ -18,15 +18,23 @@ def test_function(function, expected_value, *args):
         print("Test failed with exception:", e)
 
 
-def test_list_function(function, given_list, expected_list, *args):
+def test_list_function(function, given_list, expected_list, expected_return, *args):
     """
     Tests a function with a given expected value and arguments.
     """
     try:
-        function(given_list, *args)
+        return_value = function(given_list, *args)
+        successfully = False
         if given_list == expected_list:
-            print("Test passed")
+            if expected_return is not None:
+                if return_value == expected_return:
+                    successfully = True
+            else:
+                successfully = True
+
+        if not successfully:
+            print("Test failed : expected", expected_list, "|", expected_return,  "got", given_list, "|", return_value)
         else:
-            print("Test failed : expected", expected_list, "got", given_list)
+            print("Test passed")
     except Exception as e:
         print("Test failed with exception:", e)
