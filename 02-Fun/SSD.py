@@ -13,7 +13,13 @@ DISPLAY_REPRESENTATIONS = {
     "0": 0x7E, "1": 0x30, "2": 0x6D,
     "3": 0x79, "4": 0x33, "5": 0x5B,
     "6": 0x5F, "7": 0x70, "8": 0x7F,
-    "9": 0x7B
+    "9": 0x7B,
+
+    "A": 0b1110111, "b": 0b0011111, "C": 0b1001110,
+    "c": 0b0001101, "d": 0b0111101, "E": 0b1001111,
+    "F": 0b1000111, "H": 0b0110111, "h": 0b0010111,
+    "L": 0b0001110, "I": 0b0000110, "O": 0b1111110,
+    "o": 0b0011101, "P": 0b1100111, "S": 0b1011011
 }
 
 
@@ -42,8 +48,8 @@ def get_lines() -> list:
         line_string: str = ""
         for segment in line:
             display: str = " "
-            if segment is not None:
-                display = colored(str(segment), "red" if segment.enabled else "white")
+            if segment is not None and segment.enabled:
+                display = colored(segment.symbole, "red")
             line_string += display
         lines.append(line_string)
     return lines
@@ -93,4 +99,11 @@ for s in get_digits(now.second):
 
 for digit_ in _:
     digits.append(DISPLAY_REPRESENTATIONS[str(digit_)])
+
 print_digits({2: 2, 4: 2})
+digits.clear()
+for k, v in DISPLAY_REPRESENTATIONS.items():
+    if not k.isdigit():
+        digits.append(v)
+
+print_digits({})
