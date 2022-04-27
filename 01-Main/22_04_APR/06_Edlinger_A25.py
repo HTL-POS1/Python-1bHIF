@@ -3,10 +3,12 @@ Marc EDLINGER
 1bHIF | 21/04/2022
 Flugbahn einer Drohne
 """
-from testing import test_function_float
+from testing import test_function_float, test_list_function
 
 tList: list[float] = [0.0, 12.3, 7.2, 7.9, 6.3, 9.4, 11.9, 8.7, 14.4, 9.1, 11.3]
 hList: list[float] = [0.0, 8.71, 14.92, 12.19, 21.94, 25.97, 34.17, 27.85, 12.76, 5.73, 0.0]
+radar_height: int = 10
+to_high: list[float] = [0.0] * 11
 
 def get_sum(lst: list[float]) -> float:
     """ return the sum of all elements in lst """
@@ -14,6 +16,17 @@ def get_sum(lst: list[float]) -> float:
     for e in lst:
         sum += e
     return sum
+
+
+def check_radar(heights: list[float], found: list[float], max_height: float) -> int:
+    """ checks every element of heights, and put it into found, if it is bigger than max_height
+        returns the amound of elements, bigger than max_height"""
+    count: int = 0
+    for index, element in enumerate(heights):
+        if (element > max_height):
+            found[index] = element
+            count += 1
+    return count
 
 
 def max(lst: list[float]) -> float:
@@ -38,3 +51,20 @@ def printOut(time: list[float], height: list[float]):
 test_function_float(max, 34.17, hList)
 test_function_float(get_sum, 98.5, tList)
 test_function_float(get_sum, 164.23, hList)
+test_list_function(check_radar, to_high, [14.92, 21.94, 25.97, 34.17, 27.85, 12.76, 0.0, 0.0, 0.0, 0.0, 0.0], 6)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
