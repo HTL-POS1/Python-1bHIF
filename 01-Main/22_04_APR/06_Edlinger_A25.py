@@ -51,20 +51,3 @@ def printOut(time: list[float], height: list[float]):
 test_function_float(max, 34.17, hList)
 test_function_float(get_sum, 98.5, tList)
 test_function_float(get_sum, 164.23, hList)
-test_list_function(check_radar, to_high, [14.92, 21.94, 25.97, 34.17, 27.85, 12.76, 0.0, 0.0, 0.0, 0.0, 0.0], 6)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
