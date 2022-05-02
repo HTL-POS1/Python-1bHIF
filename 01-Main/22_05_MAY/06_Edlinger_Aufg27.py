@@ -9,15 +9,16 @@ def insert(lst: list[float], value: float, default: float = 0.0) -> int:
     """ fuegt value an der naechsten freien Stelle in lst ein und liefert entweder den Index, wo eingefuegt wurde,
         oder -1 falls es keine freie Stelle mehr gab.
         Die naechste freie Stelle ist jene, wo der erste default Wert vorkommt. """
-    state: int = -1
+    index_inserted: int = -1
     index: int = 0
-    while state == -1 and index < len(lst):
+    while (index_inserted == -1 and index < len(lst)):
         if (lst[index] == default):
             lst[index] = value
-            state = index
+            index_inserted = index
 
         index += 1
-    return state
+
+    return index_inserted
 
 
 test1: list[int] = [1, 6, 0, 8, 9, 2, 10, 0]
