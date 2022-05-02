@@ -10,6 +10,23 @@ hList: list[float] = [0.0, 8.71, 14.92, 12.19, 21.94, 25.97, 34.17, 27.85, 12.76
 radar_height: int = 10
 to_high: list[float] = [0.0] * 11
 
+
+def insert(lst: list[float], value: float, default: float = 0.0) -> int:
+    """ fuegt value an der naechsten freien Stelle in lst ein und liefert entweder den Index, wo eingefuegt wurde,
+        oder -1 falls es keine freie Stelle mehr gab.
+        Die naechste freie Stelle ist jene, wo der erste default Wert vorkommt. """
+    index_inserted: int = -1
+    index: int = 0
+    while (index_inserted == -1 and index < len(lst)):
+        if (lst[index] == default):
+            lst[index] = value
+            index_inserted = index
+
+        index += 1
+
+    return index_inserted
+
+
 def get_sum(lst: list[float]) -> float:
     """ return the sum of all elements in lst """
     sum: float = 0.0
