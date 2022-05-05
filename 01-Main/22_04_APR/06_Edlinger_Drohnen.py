@@ -3,7 +3,7 @@ Marc EDLINGER
 1bHIF | 21/04/2022
 Flugbahn einer Drohne
 """
-from testing import test_function_float, test_list_function
+from testing import test_function_float
 
 tList: list[float] = [0.0, 12.3, 7.2, 7.9, 6.3, 9.4, 11.9, 8.7, 14.4, 9.1, 11.3]
 hList: list[float] = [0.0, 8.71, 14.92, 12.19, 21.94, 25.97, 34.17, 27.85, 12.76, 5.73, 0.0]
@@ -44,8 +44,10 @@ def count_below_radar(lst: list[float], radar: float) -> int:
 
 
 def add_Flugeintrag(hoehen: list[float], h: float, zeiten: list[float], z: float) -> int:
-    insert(hoehen, h)
-    return insert(zeiten, z)
+    i = insert(hoehen, h)
+    if i != -1:
+        zeiten[i] = z
+    return i
 
 
 def check_radar(heights: list[float], found: list[float], matcher) -> int:
