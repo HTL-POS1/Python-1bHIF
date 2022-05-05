@@ -40,7 +40,7 @@ def minimale_hoehe(lst: list[float]) -> float:
 
 
 def count_below_radar(lst: list[float], radar: float) -> int:
-    return check_radar(lst, to_high, radar, lambda n: n < radar)
+    return check_radar(lst, to_high, lambda n: n < radar)
 
 
 def add_Flugeintrag(hoehen: list[float], h: float, zeiten: list[float], z: float) -> int:
@@ -48,7 +48,7 @@ def add_Flugeintrag(hoehen: list[float], h: float, zeiten: list[float], z: float
     return insert(zeiten, z)
 
 
-def check_radar(heights: list[float], found: list[float], radar_height: float, matcher) -> int:
+def check_radar(heights: list[float], found: list[float], matcher) -> int:
     """ checks every element of heights, and put it into found, if it is matches the matcher
         returns the amount of elements, bigger than max_height
         matcher has to be a function, with parameters (n) where n the checking element
