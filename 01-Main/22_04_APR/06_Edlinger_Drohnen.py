@@ -35,12 +35,28 @@ def get_sum(lst: list[float]) -> float:
     return sum
 
 
-def check_radar(heights: list[float], found: list[float], max_height: float) -> int:
-    """ checks every element of heights, and put it into found, if it is bigger than max_height
-        returns the amound of elements, bigger than max_height"""
+def minimale_hoehe(lst: list[float]) -> float:
+    return min(lst)
+
+
+def count_below_radar(lst: list[float], radar: float) -> int:
+    return check_radar(lst, to_high, radar, lambda n: n < radar)
+
+
+def add_Flugeintrag(hoehen: list[float], h: float, zeiten: list[float], z: float) -> int:
+    insert(hoehen, h)
+    return insert(zeiten, z)
+
+
+def check_radar(heights: list[float], found: list[float], radar_height: float, matcher) -> int:
+    """ checks every element of heights, and put it into found, if it is matches the matcher
+        returns the amount of elements, bigger than max_height
+        matcher has to be a function, with parameters (n) where n the checking element
+        return type has to be a boolean
+    """
     count: int = 0
     for index, element in enumerate(heights):
-        if (element > max_height):
+        if (matcher(element)):
             found[index] = element
             count += 1
     return count
@@ -51,6 +67,15 @@ def max(lst: list[float]) -> float:
     current_max: float = -1
     for e in lst:
         if e > current_max:
+            current_max = e
+    return current_max
+
+
+def min(lst: list[float]) -> float:
+    """ return the min value of lst """
+    current_max: float = None
+    for e in lst:
+        if current_max is None or e < current_max:
             current_max = e
     return current_max
 
