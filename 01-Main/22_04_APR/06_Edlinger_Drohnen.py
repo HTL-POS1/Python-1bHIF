@@ -82,6 +82,23 @@ def min(lst: list[float]) -> float:
     return current_max
 
 
+def delete(target: list, index: int, default: int) -> int:
+    """ remove all search from target and put that much default's at the end of the array """
+    count: int = 0
+    for i in range(len(target)):
+        if (index == i):
+            for j in range(index, len(target) - 1, 1):
+                target[j] = target[j + 1]
+            target[len(target) - 1] = default
+            count += 1
+            break
+
+    if (target[index] != default):
+        count += delete(target, index, default)
+
+    return count
+
+
 def rm_Flugeintrag(hoehen: list[float], zeiten: list[float], n: int) -> int:
     """löscht de n Flugeintrag an der Stelle n in den beiden Listen Flughöhen
     hoehen und Flugzeiten zeiten und liefert die gelöschte Position in beiden
@@ -90,9 +107,8 @@ def rm_Flugeintrag(hoehen: list[float], zeiten: list[float], n: int) -> int:
      en Stellen kommt jeweils der default value -1.0. """
     result: int = -1
     if 0 < n < len(hoehen):
-        hoehen[n] = -1.0
-        zeiten[n] = -1.0
-        result = n
+        delete(hoehen, n, -1)
+        delete(zeiten, n, -1)
     return result
 
 
