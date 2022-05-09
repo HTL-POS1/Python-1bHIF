@@ -82,6 +82,20 @@ def min(lst: list[float]) -> float:
     return current_max
 
 
+def rm_Flugeintrag(hoehen: list[float], zeiten: list[float], n: int) -> int:
+    """löscht de n Flugeintrag an der Stelle n in den beiden Listen Flughöhen
+    hoehen und Flugzeiten zeiten und liefert die gelöschte Position in beiden
+    Listen, oder -1 falls es nicht geklappt hat. Alle Höhen und Zeiten hinter
+    dieser Position n werden um eine Stelle nach vor verschoben. An die letzt
+     en Stellen kommt jeweils der default value -1.0. """
+    result: int = -1
+    if 0 < n < len(hoehen):
+        hoehen[n] = -1.0
+        zeiten[n] = -1.0
+        result = n
+    return result
+
+
 def get_heigt(time_i: int) -> float:
     """ return the heigt of the drone on a specific time INDEX """
     return hList[time_i]
