@@ -59,6 +59,11 @@ def build_empty_string(length: int) -> str:
 
 
 def let_drone_fly(times: list[float], heights: list[float], radar: int):
+    """
+    print the heights along the times
+    make a line when the hight is equal to the radar
+        red when heigts[i] is greater than radar, otherwise green where i is the current index
+    """
     i: int = 0
     while i < len(times) and times[i] != -1:
         current_height: int = round(heights[i])
