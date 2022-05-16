@@ -4,6 +4,7 @@ Marc EDLINGER
 Flugbahn einer Drohne
 """
 from testing import test_function_float
+from time import sleep
 
 tList: list[float] = [0.0, 12.3, 7.2, 7.9, 6.3, 9.4, 11.9, 8.7, 14.4, 9.1, 11.3]
 hList: list[float] = [0.0, 8.71, 14.92, 12.19, 21.94, 25.97, 34.17, 27.85, 12.76, 5.73, 0.0]
@@ -50,6 +51,33 @@ def add_Flugeintrag(hoehen: list[float], h: float, zeiten: list[float], z: float
     return i
 
 
+def build_empty_string(length: int) -> str:
+    s: str = ""
+    for i in range(length):
+        s += " "
+    return s
+
+
+def let_drone_fly(times: list[float], heights: list[float], radar: int):
+    i: int = 0
+    while i < len(times) and times[i] != -1:
+        current_height: int = round(heights[i])
+        current_string: str = build_empty_string(current_height) + "*"
+
+        if current_height < radar:
+            additional_zeros: int = radar_height - current_height - 1
+            current_string += build_empty_string(additional_zeros) + "\u001b[32m|\033[0m"
+        else:
+            str_list: list = list(current_string)
+            str_list[radar_height] = "\u001b[31m|\033[0m"
+            current_string = "".join(str_list)
+
+        sleep(times[i] // 5)
+
+        print(current_string, current_height)
+        i += 1
+
+
 def check_radar(heights: list[float], found: list[float], matcher) -> int:
     """ checks every element of heights, and put it into found, if it is matches the matcher
         returns the amount of elements, bigger than max_height
@@ -85,13 +113,14 @@ def min(lst: list[float]) -> float:
 def delete(target: list, index: int, default: int) -> int:
     """ remove all search from target and put that much default's at the end of the array """
     count: int = 0
-    for i in range(len(target)):
-        if (index == i):
-            for j in range(index, len(target) - 1, 1):
-                target[j] = target[j + 1]
-            target[len(target) - 1] = default
-            count += 1
-            break
+    i = 0
+    while index != i:
+        i += 1
+
+    for j in range(index, len(target) - 1, 1):
+        target[j] = target[j + 1]
+    target[len(target) - 1] = default
+    count += 1
 
     if (target[index] != default):
         count += delete(target, index, default)
@@ -107,7 +136,7 @@ def rm_Flugeintrag(hoehen: list[float], zeiten: list[float], n: int) -> int:
      en Stellen kommt jeweils der default value -1.0. """
     result: int = -1
     if 0 < n < len(hoehen):
-        delete(hoehen, n, -1)
+        result = delete(hoehen, n, -1)
         delete(zeiten, n, -1)
     return result
 
@@ -125,3 +154,4 @@ def printOut(time: list[float], height: list[float]):
 test_function_float(max, 34.17, hList)
 test_function_float(get_sum, 98.5, tList)
 test_function_float(get_sum, 164.23, hList)
+let_drone_fly(tList, hList, radar_height)
