@@ -3,11 +3,10 @@ Marc EDLINGER
 1bHIF | 21/04/2022
 Flugbahn einer Drohne
 """
-from testing import test_function_float
 from time import sleep
 
-tList: list[float] = [0.0, 12.3, 7.2, 7.9, 6.3, 9.4, 11.9, 8.7, 14.4, 9.1, 11.3]
-hList: list[float] = [0.0, 8.71, 14.92, 12.19, 21.94, 25.97, 34.17, 27.85, 12.76, 5.73, 0.0]
+tList: list[float] = [0.0, 12.3, 7.2, 7.9, 6.3, 7.34, 9.4, 11.9, 8.7, 14.4, 9.1, 11.3]
+hList: list[float] = [0.0, 8.71, 14.92, 12.19, 21.94, 34.17, 25.97, 34.17, 27.85, 12.76, 5.73, 0.0]
 radar_height: int = 10
 to_high: list[float] = [0.0] * 11
 
@@ -56,6 +55,48 @@ def build_empty_string(length: int) -> str:
     for i in range(length):
         s += " "
     return s
+
+def plot_drone_flight_curve(times: list[float], heights: list[float]):
+    h_copy = heights.copy()
+
+    for index, element in enumerate(times.copy()):
+        if (index != 0):
+            times[index] = element + times[index - 1]
+
+    for i in range(len(hList)):
+
+        # find the max height
+        max_height = -1
+        for h_index, element in enumerate(h_copy):
+            if element > max_height:
+                max_height = element
+
+        while max_height in h_copy:
+            h_copy[h_copy.index(max_height)] = -1
+
+        current_index = 0
+        max_times = [-1] * len(times)
+        for i in range(len(times)):
+            if (heights[i] == max_height):
+                max_times[current_index] = times[i]
+                current_index += 1
+
+        if max_height != -1:
+            line = f"{max_height:.2f}\t|\t"
+            for element in max_times:
+                if (element != -1):
+                    line += build_empty_string(round(element) // 2) + "*"
+            print(line)
+
+def index_of(search, iterable: list) -> int:
+    i: int = -1
+    if not len(iterable) == 0:
+        current_element = iterable[0]
+        while i < len(iterable) and current_element != search:
+            i += 1
+            current_element = iterable[i]
+
+    return i
 
 
 def let_drone_fly(times: list[float], heights: list[float], radar: int):
@@ -156,7 +197,5 @@ def printOut(time: list[float], height: list[float]):
         print(f"{time[i]:5.2f} \t|\t" + ("\033[91m" if height[i] == max(height) else "") + f"{height[i]:5.2f}\033[0m")
 
 
-test_function_float(max, 34.17, hList)
-test_function_float(get_sum, 98.5, tList)
-test_function_float(get_sum, 164.23, hList)
-let_drone_fly(tList, hList, radar_height)
+plot_drone_flight_curve(tList, hList)
+
