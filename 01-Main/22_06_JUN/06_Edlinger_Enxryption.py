@@ -13,7 +13,7 @@ def encrypt(s: str, secret: int) -> str:
 
     for c in s:
         code: int = ord(c)
-        if code in CAPITAL_ABC:
+        if CAPITAL_ABC[0] <= code and CAPITAL_ABC[ABC_LEN - 1] >= code:
             encrypted_char = chr(CAPITAL_ABC[get_new_index(CAPITAL_ABC, code, secret)])
         else:
             encrypted_char = chr(LOWER_ABC[get_new_index(LOWER_ABC, code, secret)])
