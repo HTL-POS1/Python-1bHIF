@@ -7,6 +7,12 @@ String encryption
 CAPITAL_ABC = range(65, 91)
 LOWER_ABC = range(97, 123)
 ABC_LEN = len(CAPITAL_ABC)
+REPLACEMENTS = {
+    "ö": [ord("ö") - ord("o"), ord("ö") - ord("e")],
+    "ä": [ord("ä") - ord("a"), ord("ä") - ord("e")],
+    "ü": [ord("ü") - ord("u"), ord("ü") - ord("e")],
+    "ß": [ord("ß") - ord("s"), ord("ß") - ord("z")]
+}
 
 def encrypt(s: str, secret: int) -> str:
     encrypted: str = ""
@@ -39,9 +45,17 @@ def get_new_index(abc: list[int], origin: int, secret: int):
 
 
 def change_mutation_chars(s: str) -> str:
-    pass
-
+    value: str = ""
+    for c in s:
+        if c in REPLACEMENTS.keys():
+            diffs: list[int] = REPLACEMENTS[c]
+            for diff in diffs:
+                value += chr(ord(c) - diff)
+        else:
+            value += c
+    return value
 
 print(encrypt("Willy", 5))
 print(encrypt("ABC", 5))
 print(encrypt("Hugo", 5))
+print(change_mutation_chars("Hällöß"))
