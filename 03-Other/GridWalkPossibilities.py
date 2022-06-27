@@ -12,6 +12,3 @@ def get_possibilities(x: int, y: int) -> int:
     n += get_possibilities(x, y - 1)
 
     return n
-
-
-print(get_possibilities(2, 2))
