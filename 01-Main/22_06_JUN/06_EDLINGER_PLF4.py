@@ -112,7 +112,9 @@ def build_string(i: int, s: str) -> str:
 
 
 def analyse(word: str):
-    used_chars: list[str] = [""] * len(word)
+    word_len = len(word)
+    used_chars: list[str] = [""] * word_len
+    print("len:", word_len)
     for c in word:
         if get_first_pos(used_chars, c) == -1:
             occurrence: int = count(word, c)
